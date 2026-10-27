@@ -34,6 +34,7 @@ local.properties
 # Keystore files
 *.jks
 *.keystore
+!zynwave.keystore
 *.p12
 *.pem
 

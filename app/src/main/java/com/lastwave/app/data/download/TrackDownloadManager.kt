@@ -160,7 +160,7 @@ class TrackDownloadManager @Inject constructor(
         const val EXTRA_DOWNLOAD_TITLE = "download_title"
         const val EXTRA_DOWNLOAD_ARTIST = "download_artist"
         const val EXTRA_NAVIGATE_TO = "navigate_to"
-        private const val PUBLIC_DIR_NAME = "LastWave"
+        private const val PUBLIC_DIR_NAME = "ZynWave"
         /** Legacy default kept for reading files downloaded before a custom folder was chosen. */
         private const val LEGACY_PUBLIC_DIR_NAME = "LastWave"
         // 128 KB keeps per-connection buffers out of the large-object heap:

@@ -57,7 +57,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.lastwave.app"
+        applicationId = "com.zynwave.app"
         minSdk = (project.findProperty("minSdk") as? String)?.toIntOrNull() ?: 29
         targetSdk = 35
         versionCode = 26
@@ -96,6 +96,7 @@ android {
             val keyAliasProp = resolveSecret("RELEASE_KEY_ALIAS", "ALIAS").ifBlank { "release_key" }
             val keyPasswordProp = resolveSecret("RELEASE_KEY_PASSWORD", "KEY_PASSWORD").ifBlank { storePasswordProp }
 
+            val rootKeystore = rootProject.file("zynwave.keystore")
             val keystoreFile: File? = when {
                 base64Key.isNotBlank() -> {
                     try {
@@ -108,15 +109,35 @@ android {
                         null
                     }
                 }
-                storeFilePath.isNotBlank() -> file(storeFilePath)
+                storeFilePath.isNotBlank() && file(storeFilePath).exists() -> file(storeFilePath)
+                file("release.keystore").exists() -> file("release.keystore")
+                file("../release.keystore").exists() -> file("../release.keystore")
+                file("zynwave.keystore").exists() -> file("zynwave.keystore")
+                rootKeystore.exists() -> rootKeystore
                 else -> null
             }
 
-            if (keystoreFile != null && keystoreFile.exists() && storePasswordProp.isNotBlank()) {
+            val finalStorePassword = when {
+                storePasswordProp.isNotBlank() -> storePasswordProp
+                keystoreFile == rootKeystore || keystoreFile?.name == "zynwave.keystore" -> "zynwave123"
+                else -> ""
+            }
+            val finalKeyAlias = when {
+                keyAliasProp.isNotBlank() && keyAliasProp != "release_key" -> keyAliasProp
+                keystoreFile == rootKeystore || keystoreFile?.name == "zynwave.keystore" -> "zynwave"
+                else -> keyAliasProp
+            }
+            val finalKeyPassword = when {
+                keyPasswordProp.isNotBlank() -> keyPasswordProp
+                keystoreFile == rootKeystore || keystoreFile?.name == "zynwave.keystore" -> "zynwave123"
+                else -> finalStorePassword
+            }
+
+            if (keystoreFile != null && keystoreFile.exists() && finalStorePassword.isNotBlank()) {
                 storeFile = keystoreFile
-                storePassword = storePasswordProp
-                keyAlias = keyAliasProp
-                keyPassword = keyPasswordProp
+                storePassword = finalStorePassword
+                keyAlias = finalKeyAlias
+                keyPassword = finalKeyPassword
                 enableV1Signing = true
                 enableV2Signing = true
                 enableV3Signing = true

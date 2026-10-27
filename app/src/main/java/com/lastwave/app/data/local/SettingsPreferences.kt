@@ -261,8 +261,8 @@ enum class DownloadFolderStructure(val id: String, val titleRes: Int, val exampl
     }
 }
 
-/** Default subfolder under Music/ for offline tracks (Music/LastWave). */
-const val DEFAULT_DOWNLOAD_FOLDER = "LastWave"
+/** Default subfolder under Music/ for offline tracks (Music/ZynWave). */
+const val DEFAULT_DOWNLOAD_FOLDER = "ZynWave"
 
 /** Sanitize a user-entered download folder to a safe single path segment:
  *  no separators, no traversal, max 40 chars, fallback to default. */

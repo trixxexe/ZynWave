@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LastWave</string>
-    <string name="widget_name">LastWave Player</string>
+    <string name="app_name">ZynWave</string>
+    <string name="widget_name">ZynWave Player</string>
     <string name="widget_description">Artwork, track details and playback controls for every media app</string>
-    <string name="widget_obsidian_name">LastWave Obsidian Glass</string>
+    <string name="widget_obsidian_name">ZynWave Obsidian Glass</string>
     <string name="widget_obsidian_description">Frosted obsidian glass player with translucent depth and crystal rim</string>
 
     <!-- Bottom navigation -->
@@ -15,7 +15,7 @@
     <string name="update_available">Update Available</string>
     <string name="update">Update</string>
     <string name="dismiss_update">Dismiss update</string>
-    <string name="update_ready_to_install">LastWave v%1$s is ready to install</string>
+    <string name="update_ready_to_install">ZynWave v%1$s is ready to install</string>
 
     <!-- Settings -->
     <string name="settings">Settings</string>
@@ -65,8 +65,8 @@
     <string name="theme_mode_system">System</string>
     <string name="theme_mode_light">Light</string>
     <string name="theme_mode_dark">Dark</string>
-    <string name="settings_lastwave_theme">LastWave Signature Theme</string>
-    <string name="settings_lastwave_theme_sub">Bespoke logo palette • Electric Lime &amp; Obsidian Teal</string>
+    <string name="settings_lastwave_theme">ZynWave Signature Theme</string>
+    <string name="settings_lastwave_theme_sub">Bespoke logo palette • Electric Cyan &amp; Cyber Violet</string>
     <string name="settings_amoled">AMOLED Mode</string>
     <string name="settings_amoled_sub">Pure black background (Dark mode only)</string>
     <string name="settings_dynamic_color">Dynamic Color</string>
@@ -844,7 +844,7 @@
     <string name="set_lfm_disc_title">Disconnect Last.fm?</string>
     <string name="set_lfm_disc_text">Global scrobbles pause. Your Stats switch to local listening history — nothing is deleted.</string>
     <string name="set_lfm_disc_btn">Disconnect</string>
-    <string name="set_about_title">LastWave</string>
+    <string name="set_about_title">ZynWave</string>
     <string name="set_color_title">Custom Color</string>
     <string name="set_hue">Hue</string>
     <string name="set_sat">Saturation</string>

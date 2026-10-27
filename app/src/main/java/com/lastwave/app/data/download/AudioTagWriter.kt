@@ -482,7 +482,7 @@ class AudioTagWriter @Inject constructor(
     /** Little-endian Vorbis comment block body (the FLAC variant has no framing bit). */
     private fun buildVorbisCommentBody(comments: List<String>): ByteArray {
         val out = ByteArrayOutputStream()
-        val vendor = "LastWave".toByteArray(StandardCharsets.UTF_8)
+        val vendor = "ZynWave".toByteArray(StandardCharsets.UTF_8)
         writeLe32(out, vendor.size)
         out.write(vendor)
         writeLe32(out, comments.size)
@@ -767,7 +767,7 @@ class AudioTagWriter @Inject constructor(
 
         val out = ByteArrayOutputStream()
         out.write(OPUS_TAGS.toByteArray(StandardCharsets.US_ASCII))
-        val vendor = "LastWave".toByteArray(StandardCharsets.UTF_8)
+        val vendor = "ZynWave".toByteArray(StandardCharsets.UTF_8)
         writeLe32(out, vendor.size)
         out.write(vendor)
         writeLe32(out, comments.size)

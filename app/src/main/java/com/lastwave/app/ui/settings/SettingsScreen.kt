@@ -2189,26 +2189,43 @@ fun SettingsScreen(
                     SettingsGroup(rowCount = 5) { index, position ->
                         when (index) {
                             0 -> SettingsActionCard(
-                                icon = Icons.Filled.Public,
+                                icon = Icons.Filled.Person,
                                 iconContainer = MaterialTheme.colorScheme.primaryContainer,
                                 iconTint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                title = "Global Live Map",
-                                subtitle = "telemetry.clashprojects.qd.je • Real-time listener telemetry",
+                                title = "Developer: Ritam",
+                                subtitle = "Instagram: @ritam.zip • Tap to visit Instagram profile",
                                 onClick = {
-                                    runCatching {
-                                        androidx.browser.customtabs.CustomTabsIntent.Builder().build()
-                                            .launchUrl(context, Uri.parse("https://telemetry.clashprojects.qd.je"))
-                                    }.onFailure {
-                                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://telemetry.clashprojects.qd.je")).apply {
+                                    val instaIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com/ritam.zip")).apply {
+                                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    }
+                                    if (!startActivitySafely(context, instaIntent)) {
+                                        val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/ritam.zip/")).apply {
                                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                         }
-                                        if (!startActivitySafely(context, intent)) {
-                                            viewModel.showToast("No compatible browser is available")
+                                        if (!startActivitySafely(context, webIntent)) {
+                                            viewModel.showToast("Could not open Instagram profile")
                                         }
                                     }
                                 },
                                 position = position,
-                                isHighlighted = (highlightedSettingId == "about.live_map"),
+                                isHighlighted = (highlightedSettingId == "about.developer_instagram"),
+                            )
+                            1 -> SettingsActionCard(
+                                icon = Icons.Filled.Favorite,
+                                iconContainer = MaterialTheme.colorScheme.tertiaryContainer,
+                                iconTint = MaterialTheme.colorScheme.onTertiaryContainer,
+                                title = "Inspired by LastWave",
+                                subtitle = "github.com/Clash-Projects/LastWave-Native • Open source lineage",
+                                onClick = {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Clash-Projects/LastWave-Native")).apply {
+                                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    }
+                                    if (!startActivitySafely(context, intent)) {
+                                        viewModel.showToast(context.getString(R.string.toast_no_browser_plain))
+                                    }
+                                },
+                                position = position,
+                                isHighlighted = (highlightedSettingId == "about.inspired_lastwave"),
                             )
                             1 -> SettingsActionCard(
                                 icon = Icons.AutoMirrored.Filled.Send,
@@ -2358,15 +2375,32 @@ fun SettingsScreen(
                         icon = Icons.Filled.Code,
                         iconContainer = MaterialTheme.colorScheme.secondaryContainer,
                         iconTint = MaterialTheme.colorScheme.onSecondaryContainer,
-                        title = stringResource(R.string.settings_source_code),
-                        subtitle = "github.com/Clash-Projects/LastWave-native",
+                        title = "ZynWave Source Code",
+                        subtitle = "github.com/trixxexe/ZynWave • Open source on GitHub",
                         onClick = {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Clash-Projects/LastWave-native"))
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/trixxexe/ZynWave")).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
                             if (!startActivitySafely(context, intent)) {
                                 viewModel.showToast(context.getString(R.string.toast_no_browser_plain))
                             }
                         },
                         isHighlighted = (highlightedSettingId == "about.source_code"),
+                    )
+
+                    SettingsActionCard(
+                        icon = Icons.Filled.Gavel,
+                        iconContainer = MaterialTheme.colorScheme.tertiaryContainer,
+                        iconTint = MaterialTheme.colorScheme.onTertiaryContainer,
+                        title = "GNU General Public License v3.0",
+                        subtitle = "Free & open source forever • Follows all community rules",
+                        onClick = {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gnu.org/licenses/gpl-3.0.html")).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            startActivitySafely(context, intent)
+                        },
+                        isHighlighted = (highlightedSettingId == "about.license"),
                     )
                 }
             }
@@ -4652,30 +4686,28 @@ private fun AboutCard(versionName: String) {
         ) {
             Box(
                 Modifier
-                    .size(72.dp)
+                    .size(76.dp)
                     .clip(CircleShape)
-                    // The launcher icon is an <adaptive-icon> XML on API 26+
-                    // (mipmap-anydpi-v26/ic_launcher_round.xml) — Compose's
-                    // painterResource() can only parse plain bitmap/vector
-                    // drawables, not that root element, and throws the
-                    // instant this composable enters composition. Rebuilding
-                    // the same mark from its two real layers (the lime
-                    // background color + the bars vector, both plain
-                    // resources) reproduces it exactly without touching the
-                    // adaptive icon resource at all.
-                    .background(colorResource(R.color.ic_launcher_background)),
+                    .background(Color(0xFF00E5FF)),
                 contentAlignment = Alignment.Center,
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_launcher_logo),
-                    contentDescription = "LastWave",
-                    tint = Color.Unspecified,
-                    modifier = Modifier.size(72.dp),
+                    contentDescription = "ZynWave",
+                    tint = Color(0xFF0A0E17),
+                    modifier = Modifier.size(54.dp),
                 )
             }
             Spacer(Modifier.height(14.dp))
-            Text("LastWave", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.height(8.dp))
+            Text("ZynWave", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "Next-Gen Hi-Fi Music Streaming & Offline Engine",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+            )
+            Spacer(Modifier.height(10.dp))
             Surface(
                 shape = ExpressivePillShape,
                 color = MaterialTheme.colorScheme.primaryContainer,
@@ -4688,13 +4720,36 @@ private fun AboutCard(versionName: String) {
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                 )
             }
-            Spacer(Modifier.height(12.dp))
-            Text(
-                "Build With Love ♥️ By - ℘ꪊᦓᛕꪖ᥅",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-            )
+            Spacer(Modifier.height(14.dp))
+            Surface(
+                shape = RoundedCornerShape(14.dp),
+                color = MaterialTheme.colorScheme.surfaceContainerHighest,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+            ) {
+                Column(
+                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        "Developer: Ritam",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Text(
+                        "Insta: @ritam.zip",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        "Inspired by: LastWave (Clash-Projects)",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
         }
     }
 }

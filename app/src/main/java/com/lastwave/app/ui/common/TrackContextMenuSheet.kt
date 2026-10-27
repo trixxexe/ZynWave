@@ -318,6 +318,7 @@ fun TrackContextMenuSheet(
     var showSyncedVideoDialog by remember { mutableStateOf(false) }
     val musicVideoEnabled by downloadViewModel.musicVideoEnabled.collectAsStateWithLifecycle()
     var showTimerDialog by remember { mutableStateOf(false) }
+    var showZynWaveStudio by remember { mutableStateOf(false) }
     var resolvedGenre by remember(target) { mutableStateOf<String?>(null) }
     var resolvingGenre by remember(target) { mutableStateOf(false) }
     val activeDownloads by downloadViewModel.activeDownloads.collectAsStateWithLifecycle()
@@ -462,6 +463,14 @@ fun TrackContextMenuSheet(
         }
     }
 
+    if (showZynWaveStudio) {
+        ZynWaveStudioDialog(
+            musicPlayer = musicPlayer,
+            booster = musicPlayer.zynWaveAudioBooster.get(),
+            onDismiss = { showZynWaveStudio = false }
+        )
+    }
+
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
@@ -556,6 +565,7 @@ fun TrackContextMenuSheet(
                             }
                         }
                     }
+                    add { pos -> MenuActionRow(Icons.Filled.Tune, "ZynWave Studio & Booster", position = pos) { showZynWaveStudio = true } }
                     add { pos -> MenuActionRow(Icons.Filled.Timer, stringResource(R.string.menu_sleep_timer), position = pos) { showTimerDialog = true } }
                     val splitArtists = com.lastwave.app.util.ArtistHelper.splitArtists(t.artist)
                     for (art in splitArtists) {

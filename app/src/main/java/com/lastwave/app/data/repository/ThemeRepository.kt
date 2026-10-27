@@ -257,7 +257,7 @@ class ThemeRepository @Inject constructor(
             colorScheme = darkScheme,
             amoled = isAmoled,
             mode = prefs.accentMode,
-            accentColorHex = if (isLastWave) "#C9FB00" else prefs.accentColor,
+            accentColorHex = if (isLastWave) "#00E5FF" else prefs.accentColor,
             useCustomFont = misc.useCustomFont,
             liquidGlass = isGlass,
             md3NavBar = prefs.md3NavBar,

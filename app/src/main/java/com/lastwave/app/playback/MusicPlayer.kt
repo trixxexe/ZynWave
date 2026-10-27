@@ -291,6 +291,7 @@ class MusicPlayer @Inject constructor(
     /** AutoEQ: started with the player so the saved correction is published before playback. */
     private val autoEqController: com.lastwave.app.data.autoeq.AutoEqController,
     private val lyricsRepository: dagger.Lazy<com.lastwave.app.data.lyrics.LyricsRepository>,
+    val zynWaveAudioBooster: dagger.Lazy<ZynWaveAudioBooster>,
 ) {
 
     private var autoDJGenerationJob: Job? = null
@@ -1722,6 +1723,7 @@ class MusicPlayer @Inject constructor(
                     override fun onAudioSessionIdChanged(audioSessionId: Int) {
                         effects.attach(audioSessionId)
                         runCatching { systemEffectsBridge.onSessionChanged(audioSessionId) }
+                        runCatching { zynWaveAudioBooster.get().attachSession(audioSessionId) }
                     }
                 })
             }.also { playerInstance ->
@@ -2089,10 +2091,17 @@ class MusicPlayer @Inject constructor(
                         cadenceMs = 500L
                     } else if (_state.value.current != null && playerDelegate.isInitialized()) {
                         val remaining = sleepTimerDeadlineMs?.minus(SystemClock.elapsedRealtime())
-                        if (remaining != null && remaining <= 0) {
-                            sleepTimerDeadlineMs = null
-                            sleepTimerStep = 0
-                            player.pause()
+                        val boosterState = runCatching { zynWaveAudioBooster.get().state.value }.getOrNull()
+                        if (remaining != null) {
+                            if (boosterState?.smartFadeOut == true && remaining in 1L..30_000L) {
+                                val volFraction = (remaining.toFloat() / 30_000f).coerceIn(0.08f, 1.0f)
+                                runCatching { player.volume = volFraction }
+                            } else if (remaining <= 0) {
+                                runCatching { player.volume = 1.0f }
+                                sleepTimerDeadlineMs = null
+                                sleepTimerStep = 0
+                                player.pause()
+                            }
                         }
                         if (outgoingPlayer != null || isOverlapMixActive) {
                             if (outgoingPlayer != null) {

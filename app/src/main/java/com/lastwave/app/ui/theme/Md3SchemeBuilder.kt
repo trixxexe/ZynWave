@@ -103,34 +103,35 @@ object Md3SchemeBuilder {
     )
 
     /**
-     * LastWave Signature Dark Scheme built specifically around the official app logo colors:
-     * Electric Lime (#C9FB00) and Deep Obsidian Teal (#012226).
+     * ZynWave Signature Dark Scheme built around Electric Cyan (#00E5FF),
+     * Cyber Violet (#B5179E), and Deep Cosmic Obsidian (#060A12).
      */
     fun buildLastWaveDarkScheme(amoled: Boolean, @Suppress("UNUSED_PARAMETER") liquidGlass: Boolean = false): ColorScheme {
-        val brandLime = Color(0xFFC9FB00)
-        val darkTeal = Color(0xFF012226)
-        val deepTeal = Color(0xFF01181B)
+        val brandCyan = Color(0xFF00E5FF)
+        val brandViolet = Color(0xFFB5179E)
+        val darkSurface = Color(0xFF0B111E)
+        val deepSpace = Color(0xFF060A12)
 
-        val backgroundCol = if (amoled) Color.Black else deepTeal
-        val surfaceCol = if (amoled) Color.Black else darkTeal
-        val surfaceLowCol = if (amoled) Color.Black else Color(0xFF011E22)
-        val surfaceLowestCol = if (amoled) Color.Black else Color(0xFF001214)
+        val backgroundCol = if (amoled) Color.Black else deepSpace
+        val surfaceCol = if (amoled) Color.Black else darkSurface
+        val surfaceLowCol = if (amoled) Color.Black else Color(0xFF090E18)
+        val surfaceLowestCol = if (amoled) Color.Black else Color(0xFF04070D)
 
         return darkColorScheme(
-            primary = brandLime,
-            onPrimary = darkTeal,
-            primaryContainer = Color(0xFF063E45),
-            onPrimaryContainer = Color(0xFFD6FF38),
+            primary = brandCyan,
+            onPrimary = Color(0xFF00363D),
+            primaryContainer = Color(0xFF004F58),
+            onPrimaryContainer = Color(0xFF80F2FF),
 
-            secondary = Color(0xFF38E5B7),
-            onSecondary = darkTeal,
-            secondaryContainer = Color(0xFF06474F),
-            onSecondaryContainer = Color(0xFF67F8D8),
+            secondary = brandViolet,
+            onSecondary = Color.White,
+            secondaryContainer = Color(0xFF3C096C),
+            onSecondaryContainer = Color(0xFFE0AAFF),
 
-            tertiary = Color(0xFFA6FF38),
-            onTertiary = Color(0xFF1B3800),
-            tertiaryContainer = Color(0xFF0C464C),
-            onTertiaryContainer = brandLime,
+            tertiary = Color(0xFF00F5D4),
+            onTertiary = Color(0xFF00382E),
+            tertiaryContainer = Color(0xFF005144),
+            onTertiaryContainer = Color(0xFF70F7E0),
 
             error = Color(0xFFFFB4AB),
             errorContainer = Color(0xFF93000A),
@@ -138,36 +139,51 @@ object Md3SchemeBuilder {
             onError = Color(0xFF690005),
 
             background = backgroundCol,
-            onBackground = Color(0xFFE4F8F8),
+            onBackground = Color(0xFFE1E7F5),
             surface = surfaceCol,
-            onSurface = Color(0xFFE4F8F8),
-            surfaceContainer = Color(0xFF02272C),
-            surfaceContainerHigh = Color(0xFF04333A),
-            surfaceContainerHighest = Color(0xFF073F47),
+            onSurface = Color(0xFFE1E7F5),
+            surfaceContainer = Color(0xFF11192A),
+            surfaceContainerHigh = Color(0xFF162136),
+            surfaceContainerHighest = Color(0xFF1C2A44),
             surfaceContainerLow = surfaceLowCol,
             surfaceContainerLowest = surfaceLowestCol,
-            surfaceVariant = Color(0xFF063B42),
-            onSurfaceVariant = Color(0xFFA1CACE),
+            surfaceVariant = Color(0xFF172236),
+            onSurfaceVariant = Color(0xFFA0B2C6),
 
-            outline = Color(0xFF23656E),
-            outlineVariant = Color(0xFF0A444C),
+            outline = Color(0xFF3D526E),
+            outlineVariant = Color(0xFF223145),
 
-            inverseSurface = Color(0xFFE4F8F8),
-            inverseOnSurface = darkTeal,
-            inversePrimary = Color(0xFF486300),
+            inverseSurface = Color(0xFFE1E7F5),
+            inverseOnSurface = darkSurface,
+            inversePrimary = Color(0xFF006874),
             scrim = Color.Black,
         )
     }
 
     /**
-     * LastWave Signature Light Scheme built around the official app logo colors.
+     * ZynWave Signature Light Scheme.
      */
     fun buildLastWaveLightScheme(@Suppress("UNUSED_PARAMETER") liquidGlass: Boolean = false): ColorScheme {
-        val brandLime = Color(0xFFC9FB00)
-        val darkTeal = Color(0xFF012226)
+        val brandCyanDark = Color(0xFF006874)
+        val darkSurface = Color(0xFF0E1726)
 
         return androidx.compose.material3.lightColorScheme(
-            primary = Color(0xFF486300),
+            primary = brandCyanDark,
+            onPrimary = Color.White,
+            primaryContainer = Color(0xFF97F0FF),
+            onPrimaryContainer = Color(0xFF001F24),
+
+            secondary = Color(0xFF9C27B0),
+            onSecondary = Color.White,
+            secondaryContainer = Color(0xFFF3E5F5),
+            onSecondaryContainer = Color(0xFF4A148C),
+
+            tertiary = Color(0xFF00838F),
+            onTertiary = Color.White,
+            tertiaryContainer = Color(0xFFB2EBF2),
+            onTertiaryContainer = Color(0xFF004D40),
+        )
+    }
             onPrimary = Color.White,
             primaryContainer = Color(0xFFE0FE5B),
             onPrimaryContainer = darkTeal,

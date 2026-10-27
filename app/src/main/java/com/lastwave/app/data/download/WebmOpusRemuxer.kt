@@ -181,7 +181,7 @@ internal object WebmOpusRemuxer {
 
     private fun emptyOpusTags(): ByteArray = ByteArrayOutputStream().apply {
         write(OPUS_TAGS.toByteArray(StandardCharsets.US_ASCII))
-        val vendor = "LastWave".toByteArray(StandardCharsets.UTF_8)
+        val vendor = "ZynWave".toByteArray(StandardCharsets.UTF_8)
         writeLe32(this, vendor.size)
         write(vendor)
         writeLe32(this, 0)

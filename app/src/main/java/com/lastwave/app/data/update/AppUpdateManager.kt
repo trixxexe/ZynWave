@@ -101,14 +101,26 @@ class AppUpdateManager @Inject constructor(
                 )
             }
             try {
-                val request = Request.Builder()
-                    .url("https://api.github.com/repos/Clash-Projects/LastWave-native/releases/latest")
+                var request = Request.Builder()
+                    .url("https://api.github.com/repos/trixxexe/ZynWave/releases/latest")
                     .header("Accept", "application/vnd.github.v3+json")
-                    .header("User-Agent", "LastWave-Android")
+                    .header("User-Agent", "ZynWave-Android")
                     .build()
 
-                val response = withContext(Dispatchers.IO) {
+                var response = withContext(Dispatchers.IO) {
                     okHttpClient.newCall(request).execute()
+                }
+
+                if (!response.isSuccessful && response.code == 404) {
+                    // Fallback to upstream if no release has been published under ZynWave yet
+                    request = Request.Builder()
+                        .url("https://api.github.com/repos/Clash-Projects/LastWave-native/releases/latest")
+                        .header("Accept", "application/vnd.github.v3+json")
+                        .header("User-Agent", "ZynWave-Android")
+                        .build()
+                    response = withContext(Dispatchers.IO) {
+                        okHttpClient.newCall(request).execute()
+                    }
                 }
 
                 if (!response.isSuccessful) {
