@@ -165,7 +165,9 @@ object Md3SchemeBuilder {
      */
     fun buildLastWaveLightScheme(@Suppress("UNUSED_PARAMETER") liquidGlass: Boolean = false): ColorScheme {
         val brandCyanDark = Color(0xFF006874)
-        val darkSurface = Color(0xFF0E1726)
+        val brandVioletDark = Color(0xFF7B1FA2)
+        val lightSurface = Color(0xFFF6F8FC)
+        val lightBackground = Color(0xFFF9FBFF)
 
         return androidx.compose.material3.lightColorScheme(
             primary = brandCyanDark,
@@ -173,7 +175,7 @@ object Md3SchemeBuilder {
             primaryContainer = Color(0xFF97F0FF),
             onPrimaryContainer = Color(0xFF001F24),
 
-            secondary = Color(0xFF9C27B0),
+            secondary = brandVioletDark,
             onSecondary = Color.White,
             secondaryContainer = Color(0xFFF3E5F5),
             onSecondaryContainer = Color(0xFF4A148C),
@@ -182,45 +184,30 @@ object Md3SchemeBuilder {
             onTertiary = Color.White,
             tertiaryContainer = Color(0xFFB2EBF2),
             onTertiaryContainer = Color(0xFF004D40),
-        )
-    }
-            onPrimary = Color.White,
-            primaryContainer = Color(0xFFE0FE5B),
-            onPrimaryContainer = darkTeal,
-
-            secondary = Color(0xFF014D56),
-            onSecondary = Color.White,
-            secondaryContainer = Color(0xFF9FF2E2),
-            onSecondaryContainer = darkTeal,
-
-            tertiary = Color(0xFF2C6855),
-            onTertiary = Color.White,
-            tertiaryContainer = Color(0xFFB8F9A5),
-            onTertiaryContainer = Color(0xFF0E3800),
 
             error = Color(0xFFBA1A1A),
             errorContainer = Color(0xFFFFDAD6),
             onErrorContainer = Color(0xFF410002),
             onError = Color.White,
 
-            background = Color(0xFFF2FBF7),
-            onBackground = darkTeal,
-            surface = Color(0xFFF2FBF7),
-            onSurface = darkTeal,
-            surfaceContainer = Color(0xFFE0F1EC),
-            surfaceContainerHigh = Color(0xFFD6EAE5),
-            surfaceContainerHighest = Color(0xFFCCE4DE),
-            surfaceContainerLow = Color(0xFFEAF6F2),
+            background = lightBackground,
+            onBackground = Color(0xFF191C1E),
+            surface = lightSurface,
+            onSurface = Color(0xFF191C1E),
+            surfaceContainer = Color(0xFFECF0F6),
+            surfaceContainerHigh = Color(0xFFE6EBF2),
+            surfaceContainerHighest = Color(0xFFE0E5ED),
+            surfaceContainerLow = Color(0xFFF2F4FA),
             surfaceContainerLowest = Color.White,
-            surfaceVariant = Color(0xFFD6ECE8),
-            onSurfaceVariant = Color(0xFF1E464B),
+            surfaceVariant = Color(0xFFDBE4E7),
+            onSurfaceVariant = Color(0xFF3F484B),
 
-            outline = Color(0xFF5A8E89),
-            outlineVariant = Color(0xFFB0D5D0),
+            outline = Color(0xFF6F797B),
+            outlineVariant = Color(0xFFBFC8CB),
 
-            inverseSurface = darkTeal,
-            inverseOnSurface = Color(0xFFE4F8F8),
-            inversePrimary = brandLime,
+            inverseSurface = Color(0xFF2E3133),
+            inverseOnSurface = Color(0xFFF0F1F3),
+            inversePrimary = Color(0xFF00E5FF),
             scrim = Color.Black,
         )
     }

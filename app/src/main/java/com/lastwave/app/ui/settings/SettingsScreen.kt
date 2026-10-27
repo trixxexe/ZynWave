@@ -140,6 +140,8 @@ import androidx.compose.material.icons.filled.QueueMusic
 import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Extension
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Gavel
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
